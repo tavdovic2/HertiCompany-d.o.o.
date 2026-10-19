@@ -176,7 +176,7 @@
     var html =
       '<a class="skip" href="#sadrzaj">Preskočite na sadržaj</a>' +
       '<header class="zaglavlje"><div class="wrap">' +
-      '<a class="marka" href="index.html" aria-label="Herti Company – početna stranica"><img src="slike/logo.png" alt="" width="52" height="52"><span>Herti Company<small>Proizvođač hemije, Kiseljak</small></span></a>' +
+      '<a class="marka" href="index.html" aria-label="Herti Company – početna stranica"><img src="slike/logo.png" alt="" width="52" height="52"><span>Herti Company</span></a>' +
       '<nav class="meni" id="meni" aria-label="Glavni meni">' +
       stavke.map(function (s) { return '<a href="' + s.url + '"' + (s.id === aktivna ? ' aria-current="page"' : "") + ">" + s.naziv + "</a>"; }).join("") +
       '<a class="btn btn-glavno" href="' + tel() + '">' + I.tel + "Pozovite " + esc(F.telefon) + "</a>" +
@@ -472,7 +472,9 @@
     if (kat) kat.innerHTML = karticeKategorija(KAT);
     var izd = $("#izdvojeno");
     if (izd) {
-      var lista = PR.filter(function (p) { return p.izdvojeno; });
+      // Lista NAJTRAZENIJI iz podaci/proizvodi.js, tačno tim redoslijedom (nepostojeći id se preskače)
+      var lista = (window.NAJTRAZENIJI || []).map(proizvod).filter(Boolean);
+      if (!lista.length) lista = PR.filter(function (p) { return p.izdvojeno; });
       if (!lista.length) lista = PR.slice(0, 4);
       izd.innerHTML = mreza(lista.slice(0, 8));
     }

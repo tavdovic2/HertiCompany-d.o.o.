@@ -2,6 +2,10 @@
    Ovaj fajl pravi skripta za obradu slika – ne mijenjajte ga ručno.
    Proizvod kojeg nema ovdje prikazuje se na polici kao nacrtana boca. */
 window.POLICA = {
+  "autosampon-sa-voskom-1000ml": [
+    112,
+    360
+  ],
   "destilirana-voda-1l": [
     116,
     360
@@ -74,6 +78,10 @@ window.POLICA = {
     116,
     360
   ],
+  "tecni-sapun-aloe-vera-5l": [
+    167,
+    360
+  ],
   "tecni-sapun-jorgovan-1000ml": [
     113,
     360
@@ -96,6 +104,14 @@ window.POLICA = {
   ],
   "tecnost-za-pranje-stakla-750ml": [
     118,
+    360
+  ],
+  "tecnost-za-vjetrobranska-stakla-blitz-1l": [
+    120,
+    360
+  ],
+  "tecnost-za-vjetrobranska-stakla-blitz-3l": [
+    144,
     360
   ],
   "tecnost-za-vjetrobranska-stakla-blitz-5l": [

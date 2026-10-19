@@ -129,8 +129,8 @@ section.blok.siva { background: var(--mist); }
 .zaglavlje .wrap { display: flex; align-items: center; gap: 20px; min-height: var(--header-h); }
 .marka { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); margin-right: auto; }
 .marka img { width: 52px; height: 52px; border-radius: 50%; background: var(--logo-bg); }
-.marka span { font-family: var(--naslov); font-weight: 700; font-size: 1.25rem; letter-spacing: 0; line-height: 1.1; }
-.marka small { display: block; font-family: var(--sans); font-weight: 400; font-size: .85rem; letter-spacing: 0; color: var(--ink-soft); }
+/* Naziv firme prati logotip: velika, razmaknuta slova */
+.marka span { font-family: "Montserrat", "Segoe UI", system-ui, sans-serif; font-weight: 800; font-size: 1.2rem; text-transform: uppercase; letter-spacing: .08em; line-height: 1; white-space: nowrap; color: var(--ink); }
 .meni { display: flex; align-items: center; gap: 4px; }
 .meni a { display: flex; align-items: center; min-height: 48px; padding: 0 16px; border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 700; }
 .meni a:hover { background: var(--mist); color: var(--ink); }
@@ -144,7 +144,21 @@ section.blok.siva { background: var(--mist); }
 .ikona-pretraga svg { width: 24px; height: 24px; }
 .ikona-pretraga { flex: none; }
 .ikona-tema { padding: 0; border: 0; background: transparent; cursor: pointer; }
-@media (max-width: 560px) { .zaglavlje .wrap { gap: 10px; } }
+/* Mobitel: naziv u velikim slovima mora stati u jedan red uz logo, temu, lupu i "Meni" */
+@media (max-width: 560px) {
+  .zaglavlje .wrap { gap: 6px; }
+  .marka { gap: 8px; }
+  .zaglavlje .marka img { width: 40px; height: 40px; }
+  .zaglavlje .marka span { font-size: .74rem; letter-spacing: .05em; }
+  .ikona-pretraga { width: 44px; height: 44px; }
+  .meni-dugme { padding: 0 10px; gap: 6px; }
+}
+@media (max-width: 380px) {
+  .zaglavlje .marka img { width: 36px; height: 36px; }
+  /* Najuži ekrani: "Meni" je samo ikona (riječ ostaje za čitače ekrana), da naziv stane */
+  .meni-dugme { width: 50px; padding: 0; justify-content: center; }
+  .meni-dugme span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 
 @media (max-width: 900px) {
   .meni-dugme { display: inline-flex; }
@@ -154,7 +168,6 @@ section.blok.siva { background: var(--mist); }
   .meni a { min-height: 60px; font-size: 1.25rem; border-radius: var(--r-sm); border-bottom: 1px solid var(--line); }
   .meni a[aria-current="page"] { box-shadow: inset 4px 0 0 var(--action); }
   .meni .btn { margin-top: 14px; min-height: 60px; }
-  .marka small { display: none; }
 }
 @media (min-width: 901px) { .meni .btn { display: none; } }
 
@@ -255,7 +268,7 @@ section.blok.siva { background: var(--mist); }
 .kartica:hover { border-color: var(--ink-soft); }
 .kartica .slika { aspect-ratio: 1 / 1; }
 /* Na mobitelu okvir ostaje kvadratan, ali najviše 320px visok; slika je centrirana */
-@media (max-width: 560px) { .kartica .slika { max-height: 320px; } .marka span { font-size: 1.05rem; } .marka img { width: 46px; height: 46px; } }
+@media (max-width: 560px) { .kartica .slika { max-height: 320px; } .marka span { font-size: 1rem; } .marka img { width: 46px; height: 46px; } }
 .kartica .tijelo { display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; flex: 1; }
 .kartica .brend { font-size: .95rem; color: var(--ink-soft); }
 .kartica h2, .kartica h3, .kartica h4 { font-size: 1.15rem; font-weight: 600; letter-spacing: 0; line-height: 1.3; margin: 0; }
@@ -445,6 +458,8 @@ section.blok.siva { background: var(--mist); }
 .podnozje a { color: var(--na-tamnom); }
 .podnozje a:hover { color: var(--na-tamnom-soft); }
 .podnozje .marka { margin-bottom: 14px; color: var(--na-tamnom); }
+/* Podnožje je tamno u obje teme, pa je naziv svijetao */
+.podnozje .marka span { font-size: 1.05rem; color: var(--na-tamnom); }
 .podnozje .pravno { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid var(--linija-na-tamnom); color: var(--na-tamnom-soft); font-size: .95rem; display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .podnozje .pravno a { color: var(--na-tamnom-soft); }
 .podnozje .pravno a:hover { color: var(--na-tamnom); }

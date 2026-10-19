@@ -29,8 +29,20 @@
    prednosti   – lista kratkih tačaka, svaka u navodnicima, odvojene zarezom
    slika       – putanja do slike, npr. "slike/proizvodi/exall-limun-500ml.jpg"
                  (ostavite "" dok nema slike – tada se prikazuje prazno mjesto)
-   izdvojeno   – true ako želite da se proizvod pokaže na početnoj stranici
+
+   NAJTRAŽENIJI – lista window.NAJTRAZENIJI odmah ispod ovog komentara određuje
+                 koji se proizvodi prikazuju na početnoj u "Najtraženiji proizvodi"
+                 i kojim redoslijedom. Upisuje se samo id proizvoda.
    ========================================================================== */
+
+/* NAJTRAŽENIJI PROIZVODI – prikazuju se na početnoj, ovim redoslijedom.
+   Da promijenite proizvod, upišite njegov id (iz liste ispod). */
+window.NAJTRAZENIJI = [
+  "deterdzent-za-ves-universal-gel-3l",
+  "deterdzent-za-ves-ultra-sauber-5l",
+  "sredstvo-za-podove-1000ml",
+  "tecnost-za-pranje-stakla-750ml"
+];
 
 window.KATEGORIJE = [
   {
@@ -94,8 +106,7 @@ window.PROIZVODI = [
       "Praktična boca od 500 ml za svako domaćinstvo",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/deterdzent-za-posude-limun-500ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/deterdzent-za-posude-limun-500ml.webp"
   },
   {
     id: "deterdzent-za-posude-limun-1000ml",
@@ -116,8 +127,7 @@ window.PROIZVODI = [
       "Veća boca – rjeđa kupovina i ekonomičnije korištenje",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/deterdzent-za-posude-limun-1000ml.webp",
-    izdvojeno: true
+    slika: "slike/proizvodi/deterdzent-za-posude-limun-1000ml.webp"
   },
   {
     id: "deterdzent-za-posude-limun-5l",
@@ -138,8 +148,7 @@ window.PROIZVODI = [
       "Lako dopunjavanje manjih boca",
       "Svjež miris limuna"
     ],
-    slika: "slike/proizvodi/deterdzent-za-posude-limun-5l.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/deterdzent-za-posude-limun-5l.webp"
   },
   {
     id: "deterdzent-za-posude-jabuka-500ml",
@@ -160,8 +169,7 @@ window.PROIZVODI = [
       "Praktična boca od 500 ml za svako domaćinstvo",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/deterdzent-za-posude-jabuka-500ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/deterdzent-za-posude-jabuka-500ml.webp"
   },
   {
     id: "deterdzent-za-posude-jabuka-1000ml",
@@ -182,8 +190,7 @@ window.PROIZVODI = [
       "Veća boca – rjeđa kupovina i ekonomičnije korištenje",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/deterdzent-za-posude-jabuka-1000ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/deterdzent-za-posude-jabuka-1000ml.webp"
   },
   {
     id: "deterdzent-za-posude-jabuka-5l",
@@ -204,8 +211,7 @@ window.PROIZVODI = [
       "Lako dopunjavanje manjih boca",
       "Ugodan, voćni miris jabuke"
     ],
-    slika: "slike/proizvodi/deterdzent-za-posude-jabuka-5l.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/deterdzent-za-posude-jabuka-5l.webp"
   },
 
   /* ======================= KUĆNA HEMIJA – Pranje veša ======================= */
@@ -229,8 +235,7 @@ window.PROIZVODI = [
       "Tečni deterdžent – lako se dozira",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/deterdzent-za-ves-ultra-sauber-5l.webp",
-    izdvojeno: true
+    slika: "slike/proizvodi/deterdzent-za-ves-ultra-sauber-5l.webp"
   },
   {
     id: "deterdzent-za-ves-universal-gel-3l",
@@ -251,8 +256,7 @@ window.PROIZVODI = [
       "Pakovanje od 3 L – mjera za većinu domaćinstava",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/deterdzent-za-ves-universal-gel-3l.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/deterdzent-za-ves-universal-gel-3l.webp"
   },
 
   /* ============== KUĆNA HEMIJA – Čišćenje površina i prostora ============== */
@@ -276,8 +280,7 @@ window.PROIZVODI = [
       "Za stanove, kuće, urede i lokale",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/sredstvo-za-podove-1000ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/sredstvo-za-podove-1000ml.webp"
   },
   {
     id: "univerzalno-sredstvo-za-ciscenje-limun-750ml",
@@ -298,8 +301,7 @@ window.PROIZVODI = [
       "Za kuhinju, kupatilo, stolove i vrata",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/univerzalno-sredstvo-za-ciscenje-limun-750ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/univerzalno-sredstvo-za-ciscenje-limun-750ml.webp"
   },
   {
     id: "tecnost-za-pranje-stakla-750ml",
@@ -320,8 +322,7 @@ window.PROIZVODI = [
       "Jednostavno: nanesite i obrišite",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/tecnost-za-pranje-stakla-750ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecnost-za-pranje-stakla-750ml.webp"
   },
 
   /* ======================= LIČNA HIGIJENA – Tečni sapun ======================= */
@@ -345,8 +346,7 @@ window.PROIZVODI = [
       "Lako se dopunjava iz većeg pakovanja",
       "Za kupatilo, kuhinju, urede i lokale"
     ],
-    slika: "slike/proizvodi/tecni-sapun-aloe-vera-500ml.webp",
-    izdvojeno: true
+    slika: "slike/proizvodi/tecni-sapun-aloe-vera-500ml.webp"
   },
   {
     id: "tecni-sapun-aloe-vera-1000ml",
@@ -367,8 +367,7 @@ window.PROIZVODI = [
       "Manje plastike – pumpicu koristite više puta",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/tecni-sapun-aloe-vera-1000ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecni-sapun-aloe-vera-1000ml.webp"
   },
   {
     id: "tecni-sapun-aloe-vera-5l",
@@ -389,8 +388,7 @@ window.PROIZVODI = [
       "Za punjenje zidnih dozatora i bočica",
       "Ugodan miris Aloe Vera"
     ],
-    slika: "",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecni-sapun-aloe-vera-5l.webp"
   },
   {
     id: "tecni-sapun-jorgovan-500ml",
@@ -411,8 +409,7 @@ window.PROIZVODI = [
       "Lako se dopunjava iz većeg pakovanja",
       "Za kupatilo, kuhinju, urede i lokale"
     ],
-    slika: "slike/proizvodi/tecni-sapun-jorgovan-500ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecni-sapun-jorgovan-500ml.webp"
   },
   {
     id: "tecni-sapun-jorgovan-1000ml",
@@ -433,8 +430,7 @@ window.PROIZVODI = [
       "Manje plastike – pumpicu koristite više puta",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/tecni-sapun-jorgovan-1000ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecni-sapun-jorgovan-1000ml.webp"
   },
   {
     id: "tecni-sapun-magnolija-500ml",
@@ -455,8 +451,7 @@ window.PROIZVODI = [
       "Lako se dopunjava iz većeg pakovanja",
       "Za kupatilo, kuhinju, urede i lokale"
     ],
-    slika: "slike/proizvodi/tecni-sapun-magnolija-500ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecni-sapun-magnolija-500ml.webp"
   },
   {
     id: "tecni-sapun-magnolija-1000ml",
@@ -477,8 +472,7 @@ window.PROIZVODI = [
       "Manje plastike – pumpicu koristite više puta",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/tecni-sapun-magnolija-1000ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecni-sapun-magnolija-1000ml.webp"
   },
   {
     id: "tecni-sapun-silky-rose-5l",
@@ -499,8 +493,7 @@ window.PROIZVODI = [
       "Za punjenje zidnih dozatora i bočica",
       "Za firme, hotele, restorane i škole"
     ],
-    slika: "slike/proizvodi/tecni-sapun-silky-rose-5l.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecni-sapun-silky-rose-5l.webp"
   },
 
   /* ======================= LIČNA HIGIJENA – Šampon ======================= */
@@ -524,8 +517,7 @@ window.PROIZVODI = [
       "Za porodice, apartmane, hotele i salone",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/sampon-kamilica-1000ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/sampon-kamilica-1000ml.webp"
   },
   {
     id: "sampon-kopriva-1000ml",
@@ -546,8 +538,7 @@ window.PROIZVODI = [
       "Za porodice, apartmane, hotele i salone",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/sampon-kopriva-1000ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/sampon-kopriva-1000ml.webp"
   },
 
   /* ======================= AUTO HEMIJA ======================= */
@@ -571,8 +562,7 @@ window.PROIZVODI = [
       "Za vozače, servise i autopraonice",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/sredstvo-za-ciscenje-motora-750ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/sredstvo-za-ciscenje-motora-750ml.webp"
   },
   {
     id: "sjaj-za-gume-gumax-750ml",
@@ -593,8 +583,7 @@ window.PROIZVODI = [
       "Za vozače, autopraonice i auto salone",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/sjaj-za-gume-gumax-750ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/sjaj-za-gume-gumax-750ml.webp"
   },
   {
     id: "sredstvo-za-ciscenje-koznih-sjedista-750ml",
@@ -615,8 +604,7 @@ window.PROIZVODI = [
       "Za vozače, autopraonice i servise",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/sredstvo-za-ciscenje-koznih-sjedista-750ml.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/sredstvo-za-ciscenje-koznih-sjedista-750ml.webp"
   },
   {
     id: "autosampon-sa-voskom-1000ml",
@@ -637,8 +625,7 @@ window.PROIZVODI = [
       "Boca od 1000 ml za mnogo pranja",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "",
-    izdvojeno: false
+    slika: "slike/proizvodi/autosampon-sa-voskom-1000ml.webp"
   },
   {
     id: "tecnost-za-vjetrobranska-stakla-blitz-1l",
@@ -659,8 +646,7 @@ window.PROIZVODI = [
       "Za vozače, benzinske pumpe i trgovine",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecnost-za-vjetrobranska-stakla-blitz-1l.webp"
   },
   {
     id: "tecnost-za-vjetrobranska-stakla-blitz-3l",
@@ -681,8 +667,7 @@ window.PROIZVODI = [
       "Za vozače, benzinske pumpe i trgovine",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "",
-    izdvojeno: false
+    slika: "slike/proizvodi/tecnost-za-vjetrobranska-stakla-blitz-3l.webp"
   },
   {
     id: "tecnost-za-vjetrobranska-stakla-blitz-5l",
@@ -703,8 +688,7 @@ window.PROIZVODI = [
       "Čist vjetrobran i bolja vidljivost u vožnji",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/tecnost-za-vjetrobranska-stakla-blitz-5l.webp",
-    izdvojeno: true
+    slika: "slike/proizvodi/tecnost-za-vjetrobranska-stakla-blitz-5l.webp"
   },
   {
     id: "destilirana-voda-1l",
@@ -725,8 +709,7 @@ window.PROIZVODI = [
       "Zgodna boca od 1 L",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/destilirana-voda-1l.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/destilirana-voda-1l.webp"
   },
   {
     id: "destilirana-voda-5l",
@@ -747,8 +730,7 @@ window.PROIZVODI = [
       "Za akumulatore, pegle na paru i uređaje",
       "Proizvedeno u našoj fabrici u Kiseljaku"
     ],
-    slika: "slike/proizvodi/destilirana-voda-5l.webp",
-    izdvojeno: false
+    slika: "slike/proizvodi/destilirana-voda-5l.webp"
   }
 
 ];
