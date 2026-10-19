@@ -8,11 +8,14 @@
 
 window.FIRMA = {
   naziv: "Herti Company",
+  // Puni pravni naziv – koristi se za Google (strukturirani podaci)
+  pravniNaziv: "Herti Company d.o.o.",
   ranijiNaziv: "EXON",
   godinaPreuzimanja: "2026",
 
   adresa: "Ljetovik br. 1",
   mjesto: "Kiseljak",
+  postanskiBroj: "71250",
   drzava: "Bosna i Hercegovina",
 
   // Telefon kako se PRIKAZUJE na stranici
@@ -51,6 +54,10 @@ window.PITANJA = [
   {
     pitanje: "Postoji li minimalna narudžba?",
     odgovor: "Ne. Možete naručiti onoliko koliko Vam treba, od jednog komada do većih količina za trgovinu ili firmu."
+  },
+  {
+    pitanje: "Prodajete li na veliko?",
+    odgovor: "Da. Mi smo proizvođač, pa trgovinama, firmama, ugostiteljima i autopraonicama prodajemo direktno iz fabrike, na veliko i malo. Za veće količine pošaljite upit i dobićete ponudu."
   },
   {
     pitanje: "Da li vršite dostavu?",

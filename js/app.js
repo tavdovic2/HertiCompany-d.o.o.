@@ -46,22 +46,12 @@
     return redoslijed.map(function (g) { return { naziv: g, proizvodi: mapa[g] }; });
   }
 
-  function postaviMeta(naslov, opis, kanonski) {
-    document.title = naslov ? naslov + " | Herti Company" : "Herti Company";
-    var m = $('meta[name="description"]');
-    if (!m) { m = document.createElement("meta"); m.name = "description"; document.head.appendChild(m); }
-    if (opis) m.content = opis;
-    if (kanonski && F.web) {
-      var l = $('link[rel="canonical"]');
-      if (!l) { l = document.createElement("link"); l.rel = "canonical"; document.head.appendChild(l); }
-      l.href = F.web.replace(/\/$/, "") + "/" + kanonski;
-    }
-  }
-  function jsonLd(obj) {
-    var s = document.createElement("script");
-    s.type = "application/ld+json";
-    s.textContent = JSON.stringify(obj);
-    document.head.appendChild(s);
+  // SEO za stranice koje pravi JavaScript: zamijeni opšte meta tagove iz HTML-a tačnim (js/sablon.js)
+  var HC = window.HC;
+  function primijeniGlavu(o, jsonLd) {
+    $$('title, meta[name="description"], meta[name="robots"], link[rel="canonical"], meta[property^="og:"], meta[name^="twitter:"], script[type="application/ld+json"]', document.head)
+      .forEach(function (e) { e.remove(); });
+    document.head.insertAdjacentHTML("beforeend", HC.glava(o) + (jsonLd || []).map(HC.ld).join(""));
   }
 
   /* ----------------------------------------------------------------- ikone */
@@ -148,16 +138,6 @@
 
   /* ------------------------------------------------------------------ mrvice */
   function mrvice(stavke) {
-    var baza = (F.web || "").replace(/\/$/, "");
-    jsonLd({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: stavke.map(function (s, i) {
-        var o = { "@type": "ListItem", position: i + 1, name: s.naziv };
-        if (s.url) o.item = baza + "/" + s.url;
-        return o;
-      })
-    });
     return '<nav class="mrvice" aria-label="Gdje se nalazite"><ol>' + stavke.map(function (s, i) {
       var zadnja = i === stavke.length - 1;
       return "<li>" + (zadnja ? '<span aria-current="page">' + esc(s.naziv) + "</span>" : '<a href="' + esc(s.url || "index.html") + '">' + esc(s.naziv) + "</a>") + "</li>";
@@ -253,13 +233,6 @@
     el.innerHTML = '<div class="pitanja">' + lista.map(function (q) {
       return "<details><summary>" + esc(q.pitanje) + "</summary><p>" + esc(q.odgovor) + "</p></details>";
     }).join("") + "</div>";
-    jsonLd({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: lista.map(function (q) {
-        return { "@type": "Question", name: q.pitanje, acceptedAnswer: { "@type": "Answer", text: q.odgovor } };
-      })
-    });
   }
 
   /* -------------------------------------------------------- kartice kategorija */
@@ -550,9 +523,9 @@
     });
     prikazi();
     if (location.hash === "#pretraga") input.focus();
-    postaviMeta("Svi proizvodi – kućna hemija, lična higijena i auto hemija",
-      "Katalog Herti Company: deterdženti za posuđe i veš, tečni sapuni, šamponi i auto hemija iz fabrike u Kiseljaku. Zatražite ponudu bez minimalne narudžbe.",
-      "proizvodi.html");
+    var s = HC.seoStranice("proizvodi");
+    primijeniGlavu({ naslov: s.naslov, opis: s.opis, putanja: "proizvodi.html" },
+      [HC.ldMrvice([{ naziv: "Početna", putanja: "" }, { naziv: "Svi proizvodi", putanja: "proizvodi.html" }])]);
   }
 
   function stranicaKategorije() {
@@ -574,7 +547,9 @@
       k.savjet.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul></div></section>" +
       '<section class="blok"><div class="wrap"><div class="naslov-reda"><h2>Pogledajte i druge kategorije</h2></div><div class="srodne kategorije">' + karticeKategorija(ostale) + "</div></div></section>" +
       '<div class="wrap">' + pozivTraka() + "</div>";
-    postaviMeta(k.naslov, k.opisZaGoogle, urlKategorija(k));
+    var s = HC.seoKategorije(k);
+    primijeniGlavu({ naslov: s.naslov, opis: s.opis, putanja: urlKategorija(k) },
+      [HC.ldMrvice([{ naziv: "Početna", putanja: "" }, { naziv: "Proizvodi", putanja: "proizvodi.html" }, { naziv: k.naziv, putanja: urlKategorija(k) }])]);
   }
 
   function stranicaProizvoda() {
@@ -635,12 +610,11 @@
     });
     if (location.hash === "#upit") setTimeout(function () { $("#upit").scrollIntoView(); forma.fokus(); }, 60);
 
-    postaviMeta(p.naziv + " – " + p.brend, p.kratakOpis + " Proizvođač Herti Company, Kiseljak. Zatražite ponudu.", urlProizvod(p));
-    jsonLd({
-      "@context": "https://schema.org", "@type": "Product", name: p.naziv, description: p.opis, category: k.naziv,
-      brand: { "@type": "Brand", name: p.brend },
-      manufacturer: { "@type": "Organization", name: F.naziv, address: F.adresa + ", " + F.mjesto + ", " + F.drzava, telephone: F.telefonPoziv }
-    });
+    var s = HC.seoProizvoda(p);
+    primijeniGlavu({ naslov: s.naslov, opis: s.opis, putanja: urlProizvod(p), slika: p.slika, tip: "product" }, [
+      HC.ldProizvod(p, k, urlProizvod(p)),
+      HC.ldMrvice([{ naziv: "Početna", putanja: "" }, { naziv: "Proizvodi", putanja: "proizvodi.html" }, { naziv: k.naziv, putanja: urlKategorija(k) }, { naziv: p.naziv, putanja: urlProizvod(p) }])
+    ]);
   }
 
   function stranicaKontakt() {
@@ -661,8 +635,7 @@
     main.innerHTML = '<div class="wrap nema"><p class="velika" aria-hidden="true">404</p><h1>' + esc(naslov) + "</h1>" +
       '<p class="lead">Moguće je da je adresa pogrešno upisana ili da je proizvod u međuvremenu promijenjen. Svi proizvodi su na jednom mjestu.</p>' +
       '<div class="dugmad"><a class="btn btn-glavno btn-veliko" href="proizvodi.html">Pogledajte sve proizvode</a><a class="btn btn-obrub btn-veliko" href="' + tel() + '">' + I.tel + "Pozovite nas</a></div></div>";
-    postaviMeta(naslov, "Stranica nije pronađena.");
-    var r = document.createElement("meta"); r.name = "robots"; r.content = "noindex"; document.head.appendChild(r);
+    primijeniGlavu({ naslov: naslov, opis: HC.seoStranice("404").opis, noindex: true });
   }
 
   /* ------------------------------------------------------------ pokretanje */
