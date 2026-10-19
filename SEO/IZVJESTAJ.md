@@ -147,7 +147,7 @@ Na Cloudflareu će brojevi biti malo drugačiji, ali odnos prije/poslije vrijedi
 1. Na računaru: `git switch seo`, pa u glavnom folderu `npx serve .` (ili `python -m http.server 8000`)
    i otvoriti adresu koju ispiše (npr. http://localhost:3000). Stranice se više ne otvaraju dvoklikom na fajl,
    jer koriste adrese od korijena (`/proizvodi/…`).
-2. Na GitHubu: https://github.com/tavdovic2/HertiCompany-d.o.o.---web-katalog/compare/main...seo –
+2. Na GitHubu: https://github.com/tavdovic2/HertiCompany-d.o.o./compare/main...seo –
    vide se sve izmjene, commit po commit (4 koraka + ovaj izvještaj).
 3. Ako je Cloudflare Pages već povezan s repozitorijem, za granu `seo` sam napravi **preview** adresu
    (npr. `seo.<projekat>.pages.dev`) – tu se `_redirects` i `_headers` mogu provjeriti na pravom Cloudflareu.
