@@ -9,3 +9,9 @@
 /o-nama.html       /o-nama/      301
 /kontakt.html      /kontakt/     301
 /privatnost.html   /privatnost/  301
+
+# Interni fajlovi projekta (dokumenti, alati) nisu dio stranice – ne prikazuju se posjetiocima
+/SEO/*          /             302
+/alati/*        /             302
+/UPUTSTVO.md    /             302
+/.gitignore     /             302
