@@ -1,8 +1,17 @@
 # Uputstvo za katalog Herti Company
 
 Ovo uputstvo je za radnike koji održavaju stranicu. Ne trebate biti programer.
-Za sve izmjene treba Vam samo običan program za tekst, npr. **Notepad** na Windowsu
-ili besplatni **Visual Studio Code**. Word nije dobar za ovo.
+Za izmjene treba Vam običan program za tekst, npr. besplatni **Visual Studio Code**
+(Word nije dobar za ovo), i besplatni program **Node.js** (https://nodejs.org, verzija LTS).
+
+> **Najvažnije pravilo:** nakon SVAKE izmjene u `podaci/`, `css/` ili `js/` pokrenite:
+>
+>     node alati/generisi-stranice.js
+>
+> Ovaj program od podataka pravi gotove stranice proizvoda i kategorija, `sitemap.xml`
+> i oznake verzija za CSS i JS. Bez toga se izmjena neće vidjeti na stranici.
+> Komandu kucate u terminalu otvorenom u glavnom folderu projekta
+> (u Visual Studio Code: meni **Terminal → New Terminal**).
 
 ---
 
@@ -10,11 +19,16 @@ ili besplatni **Visual Studio Code**. Word nije dobar za ovo.
 
 | Fajl ili folder | Šta je u njemu | Da li ga mijenjate |
 |---|---|---|
-| `podaci/proizvodi.js` | Svi proizvodi i kategorije | **Da**, ovdje dodajete i mijenjate proizvode |
+| `podaci/proizvodi.js` | Svi proizvodi, kategorije i lista „Najtraženiji proizvodi“ | **Da**, ovdje dodajete i mijenjate proizvode |
 | `podaci/postavke.js` | Telefon, e-mail, adresa, česta pitanja, ključ za slanje upita | **Da**, kad se promijeni kontakt |
+| `podaci/seo.js` | Naslovi i opisi stranica za Google | Kad dodate proizvod (nije obavezno) |
 | `slike/proizvodi/` | Fotografije proizvoda | **Da**, ovdje stavljate slike |
-| `o-nama.html`, `privatnost.html`, `index.html` | Tekstovi stranica | Rijetko, samo tekst između oznaka |
+| `index.html`, `o-nama/`, `kontakt/`, `privatnost/` | Tekstovi tih stranica | Rijetko, samo tekst **van** oznaka `<!-- HC:… -->` i `<!-- SEO -->` |
+| `proizvodi/`, `404.html`, `proizvod.html`, `kategorija.html`, `sitemap.xml` | Stranice koje pravi generator | **Ne** – svaka ručna izmjena se izbriše pri sljedećem pokretanju |
+| `alati/` | Generator stranica i skripta za male slike | **Ne** |
+| `_headers`, `_redirects` | Podešavanja za Cloudflare Pages (keširanje, stare adrese) | **Ne** |
 | `css/`, `js/` | Izgled i logika stranice | **Ne** |
+| `SEO/` | Ključne riječi, izvještaj i prijedlozi | Samo za čitanje |
 
 ---
 
@@ -29,9 +43,18 @@ ili besplatni **Visual Studio Code**. Word nije dobar za ovo.
    Primjer: `"tecni-sapun-lavanda-500ml"`
 7. Ako je to isti proizvod u drugom pakovanju (npr. 5 L umjesto 1 L), upišite **istu** `linija`.
    Tada se na stranici sama pojave dugmad za sva pakovanja.
-8. Sačuvajte fajl i otvorite stranicu da provjerite.
+8. Sačuvajte fajl i pokrenite `node alati/generisi-stranice.js`.
+   Program javlja grešku ako je nešto pogrešno upisano (npr. isti `id` dva puta).
+9. (Nije obavezno, ali pomaže Googleu) u `podaci/seo.js` dodajte red s naslovom i opisom
+   za Google. Ako ga ne dodate, napravi se automatski.
+10. Pogledajte stranicu na svom računaru (poglavlje 5) i pošaljite izmjene na GitHub.
 
-Stranica za novi proizvod pravi se sama. Nema ništa drugo za uraditi.
+Stranica novog proizvoda dobije adresu `herticompany.ba/proizvodi/<kategorija>/<id>/`
+i sama se doda u `sitemap.xml`. **Ne mijenjajte `id` postojećeg proizvoda** – time mu se mijenja adresa,
+a Google i kupci imaju staru.
+
+**Najtraženiji proizvodi na početnoj:** na vrhu `podaci/proizvodi.js` je lista `window.NAJTRAZENIJI`.
+Upišite `id` proizvoda, redoslijed u listi je redoslijed na stranici.
 
 **Česte greške**
 - Zaboravljen zarez `,` iza `}` između dva proizvoda.
@@ -46,13 +69,19 @@ promijenjenom bloku.
 ## 3. Kako dodati sliku proizvoda
 
 1. Fotografiju snimite na bijeloj ili svijetloj pozadini, proizvod u sredini.
-   Najbolje kvadratna slika, oko 1200 × 1200 piksela, JPG, ispod 300 KB.
-2. Nazovite fajl kao `id` proizvoda, npr. `tecni-sapun-aloe-vera-500ml.jpg`.
+   Postojeće slike su kvadratne, 1000 × 1000 piksela, WebP, proizvod zauzima oko 88 % visine.
+   Novu sliku pripremite isto, da kartice budu ujednačene.
+2. Nazovite fajl kao `id` proizvoda, npr. `tecni-sapun-aloe-vera-500ml.webp`.
 3. Stavite fajl u folder `slike/proizvodi/`.
 4. U `podaci/proizvodi.js`, kod tog proizvoda upišite:
-   `slika: "slike/proizvodi/tecni-sapun-aloe-vera-500ml.jpg",`
+   `slika: "slike/proizvodi/tecni-sapun-aloe-vera-500ml.webp",`
+5. Napravite manju verziju za kartice (treba Python i Pillow: `pip install Pillow`):
+   `python alati/male-slike.py`
+6. Pokrenite `node alati/generisi-stranice.js`.
 
 Dok slike nema, stranica prikazuje nacrtanu bocu u boji kategorije s nazivom brenda i zapreminom.
+Na pokretnoj polici na početnoj novi proizvod je nacrtana boca dok se ne napravi slika bez pozadine
+za `slike/proizvodi/polica/` (to radi programer).
 
 ---
 
@@ -70,19 +99,21 @@ Tako upit ne propada, ali kupac mora sam kliknuti „Pošalji“.
 
 ---
 
-## 5. Kako objaviti stranicu na herticompany.ba
+## 5. Pregled na svom računaru i objava
 
-Stranica je obična statička stranica, bez baze podataka. Radi na svakom hostingu.
+**Pregled prije objave.** Stranice koriste adrese od korijena (`/proizvodi/…`), pa se ne otvaraju
+dvoklikom na fajl. U terminalu, u glavnom folderu projekta, pokrenite:
 
-1. Kod svog hosting provajdera otvorite **File Manager** ili se spojite FTP programom (npr. FileZilla).
-2. Uđite u folder `public_html` (ili `www`).
-3. Prebacite **sve fajlove i foldere** iz ovog paketa, tako da je `index.html` direktno u tom folderu.
-4. Otvorite herticompany.ba i provjerite.
+    npx serve .
 
-Nakon objave prijavite stranicu u **Google Search Console**
-(https://search.google.com/search-console) i tamo dodajte `sitemap.xml`.
-Kad dodate novi proizvod, dodajte i njegovu adresu u `sitemap.xml`
-(kopirajte jedan red `<url>…</url>` i promijenite `id`).
+(ili, ako imate Python: `python -m http.server 8000`) i otvorite adresu koju program ispiše,
+npr. http://localhost:3000.
+
+**Objava.** Stranica je na **Cloudflare Pages**, povezana s GitHub repozitorijem. Svaki `git push`
+u granu `main` automatski objavi novu verziju za 1–2 minute. Nema build koraka: na GitHub idu
+gotove stranice koje je napravio generator, zato ga **uvijek pokrenite prije slanja**.
+
+`sitemap.xml` se pravi sam (generator). Google ga čita sa https://herticompany.ba/sitemap.xml.
 
 ---
 
@@ -130,11 +161,11 @@ stručnjaku za hemikalije.
 - [ ] Ako se neki proizvod prodaje kao biocid ili kozmetika, provjeriti dodatne propise za tu vrstu
 
 **Podaci kupaca**
-- [ ] Politika privatnosti je objavljena (`privatnost.html`) – pregledati je jednom godišnje
+- [ ] Politika privatnosti je objavljena (`privatnost/index.html`) – pregledati je jednom godišnje
 - [ ] Upite iz e-maila čuvati samo onoliko koliko treba, pa brisati
 - [ ] Pristup e-mailu herticompanydoo@gmail.com zaštititi jakom lozinkom i potvrdom u dva koraka
 
 **Stranica**
-- [ ] Stranica radi preko `https://` (SSL certifikat kod hosting provajdera, obično besplatan)
+- [ ] Stranica radi preko `https://` (Cloudflare Pages ga uključuje sam)
 - [ ] Poslan probni upit i stigao na e-mail
 - [ ] Provjereno na mobitelu: dugme „Pozovite“ otvara poziv na 060 312 1040

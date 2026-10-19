@@ -1,0 +1,11 @@
+# Cloudflare Pages – trajna preusmjerenja (301) sa starih adresa na nove
+# (https://developers.cloudflare.com/pages/configuration/redirects/)
+#
+# Stare adrese proizvoda i kategorija (proizvod.html?id=..., kategorija.html?id=...)
+# ovdje se ne mogu razlikovati po ?id=, pa njih preusmjeravaju fajlovi
+# proizvod.html i kategorija.html (pravi ih alati/generisi-stranice.js).
+
+/proizvodi.html    /proizvodi/   301
+/o-nama.html       /o-nama/      301
+/kontakt.html      /kontakt/     301
+/privatnost.html   /privatnost/  301

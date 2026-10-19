@@ -1,0 +1,24 @@
+# Cloudflare Pages – zaglavlja odgovora (https://developers.cloudflare.com/pages/configuration/headers/)
+#
+# HTML stranice nemaju ovdje posebno pravilo: Cloudflare ih po zadanom šalje s
+# "Cache-Control: public, max-age=0, must-revalidate", pa posjetioci uvijek vide najnoviju verziju.
+
+# Osnovna sigurnosna zaglavlja za sve adrese
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# CSS, JS i podaci: stranice ih učitavaju s ?v=<otisak sadržaja> (alati/generisi-stranice.js),
+# pa se mogu pamtiti godinu dana – nakon izmjene se mijenja adresa.
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/podaci/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Slike: 30 dana (adresa slike se ne mijenja kad se slika zamijeni, pa ne godinu dana)
+/slike/*
+  Cache-Control: public, max-age=2592000
