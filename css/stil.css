@@ -268,9 +268,9 @@ section.blok.siva { background: var(--mist); }
 .mreza { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px; }
 .kartica { position: relative; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
 .kartica:hover { border-color: var(--ink-soft); }
-.kartica .slika { aspect-ratio: 1 / 1; }
-/* Na mobitelu okvir ostaje kvadratan, ali najviše 320px visok; slika je centrirana */
-@media (max-width: 560px) { .kartica .slika { max-height: 320px; } .marka span { font-size: 1rem; } .marka img { width: 46px; height: 46px; } }
+.kartica .slika { width: 100%; aspect-ratio: 1 / 1; }
+/* Na mobitelu okvir puni širinu kartice u omjeru 4:3 (bez max-height: on je kroz omjer sužavao širinu okvira) */
+@media (max-width: 560px) { .kartica .slika { aspect-ratio: 4 / 3; } .marka span { font-size: 1rem; } .marka img { width: 46px; height: 46px; } }
 .kartica .tijelo { display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; flex: 1; }
 .kartica .brend { font-size: .95rem; color: var(--ink-soft); }
 .kartica h2, .kartica h3, .kartica h4 { font-size: 1.15rem; font-weight: 600; letter-spacing: 0; line-height: 1.3; margin: 0; }
@@ -287,7 +287,8 @@ section.blok.siva { background: var(--mist); }
 .slika[data-kat="kucna-hemija"] { --k: var(--kucna); --t: var(--kucna-tint); }
 .slika[data-kat="licna-higijena"] { --k: var(--licna); --t: var(--licna-tint); }
 .slika[data-kat="auto-hemija"] { --k: var(--auto); --t: var(--auto-tint); }
-.slika img { width: 100%; height: 100%; object-fit: contain; background: var(--slika-bg); }
+/* Slika ne utiče na veličinu okvira: pokriva ga cijelog, a proizvod je centriran i cijeli vidljiv */
+.slika img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; object-position: center; background: var(--slika-bg); }
 /* Fotografije su na bijeloj podlozi, pa je okvir bijel u obje teme (nacrtane boce zadržavaju boju kategorije) */
 .slika.ima-foto { background: var(--slika-bg); }
 :root[data-theme="dark"] .kartica .slika.ima-foto { border-bottom: 1px solid var(--line); }
@@ -329,7 +330,8 @@ section.blok.siva { background: var(--mist); }
 
 /* ---------- Stranica proizvoda ---------- */
 .proizvod-vrh { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 64px); padding: 22px 0 56px; align-items: start; }
-.proizvod-vrh .slika { aspect-ratio: 1 / 1; border-radius: var(--r-lg); }
+.proizvod-vrh > * { min-width: 0; }
+.proizvod-vrh .slika { width: 100%; aspect-ratio: 1 / 1; border-radius: var(--r-lg); }
 .proizvod-vrh .slika svg.boca { height: 78%; }
 .proizvod-vrh h1 { font-size: clamp(1.8rem, 3.6vw, 2.7rem); }
 .proizvod-brend { display: inline-flex; gap: 8px; align-items: center; margin-bottom: 12px; font-weight: 700; color: var(--ink-soft); }
@@ -344,7 +346,8 @@ section.blok.siva { background: var(--mist); }
 .proizvod-akcije .red { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 480px) { .proizvod-akcije .red { grid-template-columns: 1fr; } }
 .napomena-mala { font-size: 1rem; color: var(--ink-soft); margin-top: 6px; }
-@media (max-width: 860px) { .proizvod-vrh { grid-template-columns: 1fr; } .proizvod-vrh .slika { max-width: 520px; } }
+@media (max-width: 860px) { .proizvod-vrh { grid-template-columns: 1fr; } .proizvod-vrh .slika { max-width: 560px; margin-inline: auto; } }
+@media (max-width: 560px) { .proizvod-vrh .slika { max-width: none; } }
 
 .detalji { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); }
 @media (max-width: 860px) { .detalji { grid-template-columns: 1fr; } }
