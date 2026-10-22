@@ -73,9 +73,9 @@
     if (tip === "Galon") {
       tijelo =
         '<rect x="40" y="38" width="40" height="28" rx="5" fill="' + ink + '"/>' +
-        '<path d="M100 30h52a14 14 0 0 1 14 14v18H100z" style="fill:var(--k)"/>' +
-        '<rect x="112" y="42" width="42" height="16" rx="7" style="fill:var(--t)"/>' +
-        '<rect x="24" y="60" width="152" height="190" rx="20" style="fill:var(--k)"/>' +
+        '<path d="M100 30h52a14 14 0 0 1 14 14v18H100z" class="boja-k"/>' +
+        '<rect x="112" y="42" width="42" height="16" rx="7" class="boja-t"/>' +
+        '<rect x="24" y="60" width="152" height="190" rx="20" class="boja-k"/>' +
         '<rect x="34" y="72" width="10" height="164" rx="5" fill="#fff" opacity=".22"/>';
       labela = { x: 46, y: 118, w: 108, h: 92 };
     } else if (tip === "Boca s pumpicom") {
@@ -84,13 +84,13 @@
         '<rect x="86" y="28" width="28" height="16" rx="4" fill="' + ink + '"/>' +
         '<rect x="108" y="31" width="46" height="9" rx="4" fill="' + ink + '"/>' +
         '<rect x="80" y="72" width="40" height="26" rx="5" fill="' + ink + '"/>' +
-        '<rect x="48" y="94" width="104" height="156" rx="22" style="fill:var(--k)"/>' +
+        '<rect x="48" y="94" width="104" height="156" rx="22" class="boja-k"/>' +
         '<rect x="58" y="108" width="10" height="128" rx="5" fill="#fff" opacity=".22"/>';
       labela = { x: 60, y: 140, w: 80, h: 78 };
     } else {
       tijelo =
         '<rect x="76" y="12" width="48" height="40" rx="7" fill="' + ink + '"/>' +
-        '<path d="M80 50h40q0 22 30 36q8 4 8 14v138q0 12-12 12H54q-12 0-12-12V100q0-10 8-14q30-14 30-36z" style="fill:var(--k)"/>' +
+        '<path d="M80 50h40q0 22 30 36q8 4 8 14v138q0 12-12 12H54q-12 0-12-12V100q0-10 8-14q30-14 30-36z" class="boja-k"/>' +
         '<rect x="52" y="104" width="10" height="132" rx="5" fill="#fff" opacity=".22"/>';
       labela = { x: 58, y: 128, w: 84, h: 86 };
     }

@@ -215,7 +215,7 @@
       var o = OKVIR_BOCE[p.pakovanje] || [40, 10, 120, 241];
       unutra = '<svg viewBox="' + o.join(" ") + '" width="' + o[2] + '" height="' + o[3] + '" role="img" aria-label="' + esc(p.naziv) + '">' + HC.oblikBoce(p.pakovanje, p.brend, p.zapremina) + "</svg>";
     }
-    return '<a class="traka-predmet" data-kat="' + esc(p.kategorija) + '" href="' + URL_.proizvod(p) + '" title="' + esc(p.naziv) + '" style="--v:' + v + '"' + (kopija ? ' tabindex="-1"' : "") + ">" + unutra + "</a>";
+    return '<a class="traka-predmet" data-kat="' + esc(p.kategorija) + '" href="' + URL_.proizvod(p) + '" title="' + esc(p.naziv) + '" data-v="' + v + '"' + (kopija ? ' tabindex="-1"' : "") + ">" + unutra + "</a>";
   }
   function pokretnaTraka(el) {
     if (!el || !PR.length) return;
@@ -229,6 +229,8 @@
     el.innerHTML = '<div class="traka" role="region" aria-label="Proizvodi Herti Company">' +
       '<div class="traka-okvir"><div class="traka-red">' + niz(false) + niz(true) + "</div></div>" +
       '<div class="traka-linija" aria-hidden="true"></div></div>';
+    // Visina predmeta (--v) se postavlja ovdje, a ne kroz style="" u HTML-u, koji Content-Security-Policy ne dozvoljava
+    $$(".traka-predmet", el).forEach(function (a) { a.style.setProperty("--v", a.getAttribute("data-v")); });
 
     // Trajanje kruga prema dužini reda, da brzina (px/s) uvijek bude ista:
     // 0,2 visine trake u sekundi (oko 44 px/s na računaru, 30 px/s na mobitelu)

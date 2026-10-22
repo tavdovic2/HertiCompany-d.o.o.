@@ -176,14 +176,13 @@ zapisi("404.html", H.dokument({
 }), null);
 
 /* --------------------------------------------- stare adrese (?id=) -> nove adrese */
-// Cloudflare _redirects ne razlikuje ?id=..., pa ove dvije stranice preusmjeravaju JavaScriptom
+// Cloudflare _redirects ne razlikuje ?id=..., pa ove dvije stranice preusmjeravaju JavaScriptom (js/preusmjeri.js).
+// Mapa je JSON blok koji se ne izvršava, pa ga Content-Security-Policy ne blokira.
 function preusmjerenje(fajl, mapa) {
-  const skripta = "(function(){var m=" + JSON.stringify(mapa) + ";var id=\"\";try{id=new URLSearchParams(location.search).get(\"id\")||\"\"}catch(e){}" +
-    "var u=Object.prototype.hasOwnProperty.call(m,id)?m[id]:\"/proizvodi/\";" +
-    "var c=document.querySelector('link[rel=\"canonical\"]');if(c)c.href=\"" + SEO.BAZA + "\"+u;location.replace(u+location.hash);})();";
   zapisi(fajl, "<!doctype html>\n<html lang=\"bs\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
     "<title>Preusmjeravanje | Herti Company</title>\n<link rel=\"canonical\" href=\"" + SEO.BAZA + "/proizvodi/\">\n" +
-    "<script>" + skripta + "</script>\n<noscript><meta http-equiv=\"refresh\" content=\"0; url=/proizvodi/\"></noscript>\n</head>\n" +
+    "<script type=\"application/json\" id=\"mapa\" data-baza=\"" + SEO.BAZA + "\">" + JSON.stringify(mapa).replace(/</g, "\\u003c") + "</script>\n" +
+    "<script src=\"" + D.v("js/preusmjeri.js") + "\"></script>\n<noscript><meta http-equiv=\"refresh\" content=\"0; url=/proizvodi/\"></noscript>\n</head>\n" +
     "<body>\n<p>Stranica je premještena. <a href=\"/proizvodi/\">Pogledajte sve proizvode</a>.</p>\n</body>\n</html>\n", null);
 }
 preusmjerenje("proizvod.html", Object.fromEntries(D.PR.map(p => [p.id, URL.proizvod(p)])));

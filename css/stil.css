@@ -483,6 +483,22 @@ section.blok.siva { background: var(--mist); }
 .nema { padding: 60px 0; }
 .nema .velika { font-family: var(--naslov); font-weight: 700; letter-spacing: -0.02em; font-size: clamp(5rem, 16vw, 10rem); line-height: 1; margin: 0; }
 
+/* Pojedinačni razmaci umjesto style="" u HTML-u (Content-Security-Policy u _headers ne dozvoljava style="").
+   !important da imaju istu prednost kao ranije style="". */
+.mt-16 { margin-top: 16px !important; }
+.mt-22 { margin-top: 22px !important; }
+.mt-28 { margin-top: 28px !important; }
+.mt-72 { margin-top: 72px !important; }
+.mt-2em { margin-top: 2em !important; }
+.pt-24 { padding: 24px 0 0 !important; }
+.pt-28 { padding-top: 28px !important; }
+.h-36 { height: 36px !important; }
+.link-tiho { color: inherit !important; text-decoration: none !important; }
+.vrijednosti.jedna-kolona { grid-template-columns: 1fr !important; }
+/* Crtež boce (js/sablon.js): boje kategorije */
+.boja-k { fill: var(--k); }
+.boja-t { fill: var(--t); }
+
 @media print {
   .zaglavlje, .donja-traka, .podnozje, .obrazac, .upit-okvir, .btn { display: none !important; }
   body { font-size: 12pt; }

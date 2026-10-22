@@ -126,12 +126,12 @@ module.exports = function (D) {
     const lista = KAT.map(k => {
       const uKat = PR.filter(p => p.kategorija === k.id);
       if (!uKat.length) return "";
-      return '<section class="kat-sekcija" data-kat="' + k.id + '" aria-labelledby="k-' + k.id + '"><div class="grupa-naslov"><h2 id="k-' + k.id + '"><a href="' + URL.kategorija(k) + '" style="color:inherit;text-decoration:none">' + esc(k.naziv) + '</a></h2><span class="broj">' + brojProizvoda(uKat.length) + "</span></div>" +
+      return '<section class="kat-sekcija" data-kat="' + k.id + '" aria-labelledby="k-' + k.id + '"><div class="grupa-naslov"><h2 id="k-' + k.id + '"><a href="' + URL.kategorija(k) + '" class="link-tiho">' + esc(k.naziv) + '</a></h2><span class="broj">' + brojProizvoda(uKat.length) + "</span></div>" +
         grupeRedom(uKat).map(g => '<div class="grupa-blok">' + (g.naziv ? '<div class="grupa-naslov mala"><h3>' + esc(g.naziv) + "</h3></div>" : "") + mreza(g.proizvodi, g.naziv ? "h4" : "h3") + "</div>").join("") +
         "</section>";
     }).join("");
     return '<div class="wrap">' + mrvice([{ naziv: "Početna", url: "/" }, { naziv: "Svi proizvodi" }]) +
-      '<div style="padding:24px 0 0"><h1>Svi proizvodi</h1><p class="lead">' + brojProizvoda(PR.length) + " iz naše fabrike u Kiseljaku, poredano po kategorijama. Upišite šta tražite ili izaberite kategoriju.</p></div>" +
+      '<div class="pt-24"><h1>Svi proizvodi</h1><p class="lead">' + brojProizvoda(PR.length) + " iz naše fabrike u Kiseljaku, poredano po kategorijama. Upišite šta tražite ili izaberite kategoriju.</p></div>" +
       '<div class="alati">' +
       '<form class="pretraga" role="search" id="pretraga-forma" action="' + URL.proizvodi + '" method="get"><label><span class="visually-hidden">Pretražite proizvode</span>' + I.lupa.replace("<svg", '<svg class="lupa"') +
       '<input id="pretraga" name="q" type="search" placeholder="Npr. sapun, staklo, 5 L, Exall" autocomplete="off"></label></form>' +
@@ -151,9 +151,9 @@ module.exports = function (D) {
       "<div><div><h1>" + esc(k.naslov) + '</h1><p class="lead">' + esc(k.uvod) + "</p>" +
       "<p><strong>" + brojProizvoda(uKat.length) + "</strong>. Bez minimalne narudžbe, s dostavom.</p></div>" + I[k.id] + "</div></div></div>" +
       '<div class="wrap">' +
-      grupeRedom(uKat).map(g => (g.naziv ? '<div class="grupa-naslov"><h2>' + esc(g.naziv) + "</h2><span>" + brojProizvoda(g.proizvodi.length) + "</span></div>" : '<div style="height:36px"></div>') + mreza(g.proizvodi, g.naziv ? "h3" : "h2")).join("") +
+      grupeRedom(uKat).map(g => (g.naziv ? '<div class="grupa-naslov"><h2>' + esc(g.naziv) + "</h2><span>" + brojProizvoda(g.proizvodi.length) + "</span></div>" : '<div class="h-36"></div>') + mreza(g.proizvodi, g.naziv ? "h3" : "h2")).join("") +
       "</div>" +
-      '<section class="blok siva" style="margin-top:72px"><div class="wrap savjet"><div><h2>Koje pakovanje izabrati?</h2><p class="muted">Kratak savjet za domaćinstva, trgovine i firme.</p></div><ul>' +
+      '<section class="blok siva mt-72"><div class="wrap savjet"><div><h2>Koje pakovanje izabrati?</h2><p class="muted">Kratak savjet za domaćinstva, trgovine i firme.</p></div><ul>' +
       k.savjet.map(s => "<li>" + esc(s) + "</li>").join("") + "</ul></div></section>" +
       '<section class="blok"><div class="wrap"><div class="naslov-reda"><h2>Pogledajte i druge kategorije</h2></div><div class="srodne kategorije">' + karticeKategorija(ostale) + "</div></div></section>" +
       '<div class="wrap">' + pozivTraka() + "</div>";
@@ -188,9 +188,9 @@ module.exports = function (D) {
       "</div></div></div>" +
 
       '<section class="blok siva"><div class="wrap detalji"><div><h2>O proizvodu</h2><p>' + esc(p.opis) + "</p>" +
-      '<h3 style="margin-top:28px">Zašto ga kupci biraju</h3><ul class="lista-kvacica">' +
+      '<h3 class="mt-28">Zašto ga kupci biraju</h3><ul class="lista-kvacica">' +
       p.prednosti.map(x => "<li>" + I.kvacica + "<span>" + esc(x) + "</span></li>").join("") + "</ul>" +
-      '<p class="napomena-mala" style="margin-top:22px">Prije upotrebe pročitajte uputstvo na etiketi. Čuvati van domašaja djece.</p></div>' +
+      '<p class="napomena-mala mt-22">Prije upotrebe pročitajte uputstvo na etiketi. Čuvati van domašaja djece.</p></div>' +
       '<div><table class="tabela"><caption>Specifikacija</caption><tbody>' +
       redovi.map(r => '<tr><th scope="row">' + esc(r[0]) + "</th><td>" + esc(r[1]) + "</td></tr>").join("") +
       "</tbody></table>" +
@@ -210,9 +210,9 @@ module.exports = function (D) {
     '<div class="dugmad"><a class="btn btn-glavno btn-veliko" href="' + URL.proizvodi + '">Pogledajte sve proizvode</a><a class="btn btn-obrub btn-veliko" href="' + tel() + '">' + I.tel + "Pozovite nas</a></div></div>";
 
   /* ------------------------------------------------- <head> resursi i skripte */
-  // Tema se postavi prije učitavanja CSS-a, pa stranica ne bljesne pogrešnom bojom
-  const SKRIPTA_TEME = '<script>(function(){var t="light";try{if(localStorage.getItem("herti-tema")==="dark")t="dark"}catch(e){}document.documentElement.dataset.theme=t;if(t==="dark"){var m=document.querySelector(\'meta[name="theme-color"]\');if(m)m.content="#0f1a2b"}})();</script>';
-  // Fontovi se učitavaju bez blokiranja prikaza: tekst se odmah vidi, a font se zamijeni kad stigne (display=swap)
+  // Fontovi se učitavaju bez blokiranja prikaza: tekst se odmah vidi, a font se zamijeni kad stigne (display=swap).
+  // media="print" -> "all" prebacuje js/tema.js (Content-Security-Policy ne dozvoljava onload="" u HTML-u).
+  // js/tema.js postavi temu prije učitavanja CSS-a, pa stranica ne bljesne pogrešnom bojom (zato bez defer).
   const FONTOVI = "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Poppins:wght@600;700&family=Montserrat:wght@800&display=swap";
   const resursi = () => [
     '<meta name="theme-color" content="#ffffff">',
@@ -220,9 +220,9 @@ module.exports = function (D) {
     '<link rel="apple-touch-icon" href="/slike/apple-touch-icon.png">',
     '<link rel="preconnect" href="https://fonts.googleapis.com">',
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-    '<link rel="preload" as="style" href="' + FONTOVI + '" onload="this.onload=null;this.rel=\'stylesheet\'">',
+    '<link rel="stylesheet" href="' + FONTOVI + '" media="print" data-fontovi>',
     '<noscript><link rel="stylesheet" href="' + FONTOVI + '"></noscript>',
-    SKRIPTA_TEME,
+    '<script src="' + D.v("js/tema.js") + '"></script>',
     '<link rel="stylesheet" href="' + D.v("css/stil.css") + '">'
   ].join("\n");
   // Svaka stranica učitava samo podatke koji joj trebaju
