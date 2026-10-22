@@ -107,11 +107,11 @@ window.POLICA = {
     360
   ],
   "tecnost-za-vjetrobranska-stakla-blitz-1l": [
-    120,
+    110,
     360
   ],
   "tecnost-za-vjetrobranska-stakla-blitz-3l": [
-    144,
+    173,
     360
   ],
   "tecnost-za-vjetrobranska-stakla-blitz-5l": [
