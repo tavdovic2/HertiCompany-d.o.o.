@@ -11,9 +11,10 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self' https://api.web3forms.com https://cloudflareinsights.com; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
-# Content-Security-Policy (CSP): stranica smije učitati samo svoje fajlove, Google Fonts i slati upit na Web3Forms.
+# Content-Security-Policy (CSP): stranica smije učitati samo svoje fajlove, Google Fonts, Cloudflare Web Analytics
+# (ubacuje ga Cloudflare samo na herticompany.ba) i slati upit na Web3Forms.
 # Zato u HTML-u NEMA <script>...</script> s kodom, onload="" ni style="" – sve je u js/ i css/stil.css.
 # Ako dodate novu vanjsku uslugu (mapa, analitika, video), mora se dodati i ovdje, inače je preglednik blokira.
 
