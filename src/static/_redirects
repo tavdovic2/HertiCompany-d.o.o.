@@ -1,0 +1,21 @@
+# Cloudflare Pages redirects: https://developers.cloudflare.com/pages/configuration/redirects/
+# First match wins, so specific rules come before general ones.
+# Legacy ?id= product and category URLs are handled by proizvod.html and kategorija.html.
+
+/proizvodi.html    /proizvodi/   301
+/o-nama.html       /o-nama/      301
+/kontakt.html      /kontakt/     301
+/privatnost.html   /privatnost/  301
+
+# Legacy asset paths
+/slike/proizvodi/mala/*     /assets/images/products/thumbs/:splat  301
+/slike/proizvodi/polica/*   /assets/images/products/shelf/:splat   301
+/slike/proizvodi/*          /assets/images/products/:splat         301
+/slike/logo-mali.webp       /assets/images/logo-small.webp         301
+/slike/*                    /assets/images/:splat                  301
+/css/stil.css               /assets/css/main.css                   301
+/js/app.js                  /assets/js/main.js                     301
+/js/sablon.js               /assets/js/templates.js                301
+/js/tema.js                 /assets/js/theme.js                    301
+/js/preusmjeri.js           /assets/js/legacy-redirect.js          301
+/podaci/*                   /assets/js/catalog.js                  301
