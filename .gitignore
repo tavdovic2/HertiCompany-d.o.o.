@@ -1,0 +1,32 @@
+# Build output
+dist/
+node_modules/
+
+# Local only: documentation, image tools and source images
+docs/
+tools/
+archive/
+originali/
+originals/
+Mockup/
+brag-output*/
+
+# Legacy layout (kept locally, no longer part of the site)
+SEO/
+alati/
+UPUTSTVO.md
+
+# Editors and AI assistants
+.vscode/
+.idea/
+.claude/
+CLAUDE.md
+
+# Logs and secrets
+*.log
+.env*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

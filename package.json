@@ -1,0 +1,13 @@
+{
+  "name": "herticompany-website",
+  "private": true,
+  "description": "Product catalogue website for Herti Company d.o.o.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "node scripts/build.js && node scripts/serve.js",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  }
+}
