@@ -1,0 +1,25 @@
+<div class="wrap">
+  {{breadcrumbs}}
+</div>
+<section class="block pt-28" id="upit">
+  <div class="wrap inquiry">
+    <div class="inquiry-aside">
+      <h1>Kontakt i upit za ponudu</h1>
+      <p class="lead">Najbrže je da nas pozovete. Možete poslati i upit, a mi Vas kontaktiramo u najkraćem roku.</p>
+      <ul class="contact-list">
+        <li><span class="icon">{{icon.phone}}</span><div><small>Telefon</small><a href="{{company.phoneHref}}">{{company.phone}}</a></div></li>
+        <li><span class="icon">{{icon.mail}}</span><div><small>E-mail</small><a href="mailto:{{company.email}}">{{company.email}}</a></div></li>
+        <li><span class="icon">{{icon.location}}</span><div><small>Adresa fabrike</small><strong>{{company.address}}, {{company.city}}</strong></div></li>
+      </ul>
+      <a class="btn btn-primary btn-lg" href="{{company.phoneHref}}">{{icon.phone}}Pozovite nas</a>
+      <p class="note mt-16">Nema minimalne narudžbe. Dostava postoji, a uslove dogovaramo uz ponudu.</p>
+    </div>
+    {{inquiryFormRoot}}
+  </div>
+</section>
+<section class="block tinted">
+  <div class="wrap">
+    <h2>Česta pitanja</h2>
+    <div id="pitanja">{{faq}}</div>
+  </div>
+</section>

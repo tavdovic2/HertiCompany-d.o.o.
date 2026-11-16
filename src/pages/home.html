@@ -1,0 +1,71 @@
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Hemija za čist dom, njegu i automobil, iz naše fabrike u Kiseljaku</h1>
+      <p class="lead">Herti Company proizvodi deterdžente, tečne sapune, šampone i auto hemiju pod sedam vlastitih brendova. Pogledajte katalog i zatražite ponudu za domaćinstvo, trgovinu ili firmu.</p>
+      <form class="search" role="search" action="/proizvodi/" method="get">
+        <label><span class="visually-hidden">Pretražite proizvode</span>{{icon.searchField}}<input type="search" name="q" placeholder="Šta tražite? Npr. sapun, staklo, 5 L" autocomplete="off"></label>
+        <button class="btn btn-primary btn-lg" type="submit">Pretražite</button>
+      </form>
+      <ul class="hero-facts">
+        <li>{{icon.check}}Bez minimalne narudžbe</li>
+        <li>{{icon.check}}Dostava</li>
+        <li>{{icon.check}}Vlastita proizvodnja</li>
+      </ul>
+    </div>
+    <div class="hero-shelf" id="shelf"></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Izaberite kategoriju</h2>
+      <p><a href="/proizvodi/">Pogledajte svih {{productCount}} proizvoda</a></p>
+    </div>
+    <div class="category-grid">{{categoryCards}}</div>
+  </div>
+</section>
+
+<section class="block tinted">
+  <div class="wrap">
+    <div class="section-head"><h2>Zašto kupci rade s nama</h2></div>
+    <ul class="features">
+      <li><h3>Vlastita fabrika</h3><p>Svaki proizvod iz kataloga pravimo sami, u Kiseljaku. Znamo šta je u boci i odgovaramo za to.</p></li>
+      <li><h3>Bez minimalne narudžbe</h3><p>Naručite koliko Vam treba, od nekoliko komada do punog kombija.</p></li>
+      <li><h3>Dostava</h3><p>Robu Vam dovozimo. Uslove i rok dostave dogovaramo uz ponudu.</p></li>
+      <li><h3>Brz odgovor</h3><p>Na upit se javljamo u najkraćem roku, telefonom ili e-mailom.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head"><h2>Najtraženiji proizvodi</h2><p><a href="/proizvodi/">Svi proizvodi</a></p></div>
+    {{featuredProducts}}
+  </div>
+</section>
+
+<section class="block tinted">
+  <div class="wrap">
+    <div class="section-head"><h2>Kako do ponude</h2><p>Tri koraka, bez registracije i bez plaćanja na stranici.</p></div>
+    <ol class="steps">
+      <li><h3>Izaberite proizvod</h3><p>Pronađite ga u katalogu ili kroz pretragu.</p></li>
+      <li><h3>Kliknite „Zatraži ponudu“</h3><p>Upišite količinu i broj telefona. Proizvod je već upisan.</p></li>
+      <li><h3>Mi Vas kontaktiramo</h3><p>Javljamo se u najkraćem roku s cijenom i uslovima dostave.</p></li>
+    </ol>
+    <div class="btn-group">
+      <a class="btn btn-primary btn-lg" href="/proizvodi/">Pogledajte proizvode</a>
+      <a class="btn btn-outline btn-lg" href="{{company.phoneHref}}">{{icon.phone}}Pozovite {{company.phone}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-head"><h2>Česta pitanja</h2><p><a href="/kontakt/">Imate drugo pitanje? Pišite nam.</a></p></div>
+    <div id="pitanja">{{faq}}</div>
+  </div>
+</section>
+
+<div class="wrap">{{ctaBanner}}</div>
